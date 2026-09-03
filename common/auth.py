@@ -13,7 +13,7 @@ from common.logging_conf import get_logger
 
 logger = get_logger("auth")
 
-
+# 认证管理类
 class AuthManager:
     """认证管理：登录、缓存 token、401 自动重新登录。
 
