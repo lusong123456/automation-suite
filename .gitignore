@@ -38,3 +38,4 @@ reports/logs/
 # 系统
 .DS_Store
 Thumbs.db
+.trae/rules/git-commit-message.md
