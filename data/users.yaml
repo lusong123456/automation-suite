@@ -1,0 +1,26 @@
+# 用户相关边界测试数据
+# 通过 common.dataload.load_yaml 加载，配合 pytest.mark.parametrize 使用
+
+- name: "正常用户"
+  job: "工程师"
+  expect_valid: true
+
+- name: "含空格"
+  job: " 产品经理 "
+  expect_valid: true   # validator 会 strip
+
+- name: "特殊字符!@#$%"
+  job: "QA&测试"
+  expect_valid: true
+
+- name: ""
+  job: "工程师"
+  expect_valid: false  # 空名应被拦截
+
+- name: "用户"
+  job: ""
+  expect_valid: false  # 空 job 应被拦截
+
+- name: "   "
+  job: "工程师"
+  expect_valid: false  # 纯空白应被拦截

@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "automation-suite"
+version = "0.1.0"
+description = "Python 自动化测试套件：api 功能测试为主，预留 perf/security/contract 扩展位"
+requires-python = ">=3.10"
+readme = "README.md"
+
+[project.optional-dependencies]
+# 核心底座：所有测试类型共享
+core = [
+    "pydantic>=2.5",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+    "httpx>=0.25",
+    "tenacity>=8.2",
+    "jsonpath-ng>=1.6",
+    "pyyaml>=6.0",
+]
+# 开发工具链
+dev = [
+    "pytest>=7.4",
+    "pytest-xdist>=3.5",
+    "pytest-assume>=2.4",
+    "allure-pytest>=2.13",
+    "ruff>=0.6",
+    "mypy>=1.7",
+    "pre-commit>=3.6",
+    "types-PyYAML",
+]
+# API 模块：core 依赖直接列出（避免 self-reference extras 触发 pip 递归解析）
+api = [
+    "pydantic>=2.5",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+    "httpx>=0.25",
+    "tenacity>=8.2",
+    "jsonpath-ng>=1.6",
+    "pyyaml>=6.0",
+    "factory-boy>=3.3",
+    "faker>=22.0",
+]
+# 扩展位：预留依赖
+perf = ["locust>=2.20"]
+security = ["python-zaproxy>=0.1"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["common*", "modules*"]
+
+# --- pytest 配置 ---
+[tool.pytest.ini_options]
+minversion = "7.4"
+testpaths = ["modules/api/tests"]
+addopts = "-v --alluredir=reports/allure --strict-markers --strict-config"
+markers = [
+    "smoke: 冒烟测试，核心链路快速验证",
+    "regression: 回归测试，覆盖边界与异常",
+    "e2e: 端到端场景测试",
+]
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning:pytest_assume.*",
+]
+
+# --- ruff 配置 ---
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["reports", "data"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W",   # pycodestyle / pyflakes
+    "I",             # isort
+    "B",             # bugbear
+    "UP",            # pyupgrade
+    "C4",            # comprehensions
+    "SIM",           # simplify
+]
+ignore = [
+    "E501",   # 行长度交给 formatter
+    "B008",   # 函数默认值中调用 factory（factory-boy 必要）
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["common", "modules"]
+
+# --- mypy 配置 ---
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+ignore_missing_imports = true
+exclude = ["reports/", "data/"]
+
+[[tool.mypy.overrides]]
+module = ["factory", "faker.*", "jsonpath_ng.*", "allure.*", "pytest_assume.*"]
+ignore_missing_imports = true
