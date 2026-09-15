@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "user_get_response.json",
+  "title": "UserGetResponse",
+  "description": "GET /api/users/{id} 查询用户接口的响应契约（对齐 reqres.in 实际返回）",
+  "type": "object",
+  "required": ["data"],
+  "additionalProperties": true,
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": ["id", "email", "first_name", "last_name", "avatar"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "用户 ID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "邮箱"
+        },
+        "first_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "名"
+        },
+        "last_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "姓"
+        },
+        "avatar": {
+          "type": "string",
+          "format": "uri",
+          "description": "头像 URL"
+        }
+      }
+    },
+    "support": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "url": { "type": "string" },
+        "text": { "type": "string" }
+      }
+    }
+  }
+}

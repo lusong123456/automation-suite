@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "user_create_response.json",
+  "title": "UserCreateResponse",
+  "description": "POST /api/users 创建用户接口的响应契约（对齐 reqres.in 实际返回）",
+  "type": "object",
+  "required": ["id", "name", "job", "createdAt"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": ["string", "integer"],
+      "description": "用户 ID，reqres 可能返回字符串或整数"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "用户名，必须非空字符串"
+    },
+    "job": {
+      "type": "string",
+      "minLength": 1,
+      "description": "职位，必须非空字符串"
+    },
+    "createdAt": {
+      "type": "string",
+      "minLength": 1,
+      "description": "创建时间字符串"
+    }
+  }
+}

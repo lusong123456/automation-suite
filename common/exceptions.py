@@ -19,3 +19,7 @@ class ContextExtractionError(SuiteError):
 
 class RenderError(SuiteError):
     """模板渲染失败时抛出。"""
+
+
+class ContractError(SuiteError):
+    """契约校验失败时抛出：响应不符合 schema 或 OpenAPI 规范。"""
