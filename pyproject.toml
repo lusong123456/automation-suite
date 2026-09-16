@@ -46,6 +46,8 @@ api = [
 # 扩展位：预留依赖
 perf = ["locust>=2.20"]
 security = ["python-zaproxy>=0.1"]
+# MQTT 消息发布
+mqtt = ["paho-mqtt>=2.1"]
 # 契约测试模块：L1 schema 守护（必装）+ L2 OpenAPI 属性 + L3 消费者契约
 contract = [
     "jsonschema>=4.20",        # L1 本地 schema 校验
@@ -106,5 +108,5 @@ ignore_missing_imports = true
 exclude = ["reports/", "data/"]
 
 [[tool.mypy.overrides]]
-module = ["factory", "faker.*", "jsonpath_ng.*", "allure.*", "pytest_assume.*", "jsonschema.*", "schemathesis.*", "pact.*"]
+module = ["factory", "faker.*", "jsonpath_ng.*", "allure.*", "pytest_assume.*", "jsonschema.*", "schemathesis.*", "pact.*", "paho.mqtt.*"]
 ignore_missing_imports = true
