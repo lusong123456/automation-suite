@@ -7,7 +7,10 @@ import json
 import time
 from pathlib import Path
 
+from common.logging_conf import setup_logging
 from common.mqtt_publisher import MqttPublisher
+
+setup_logging()
 
 # ============ 参数（改这里） ============
 DEVICE_ID = "342401003"

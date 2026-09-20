@@ -1,1 +1,1547 @@
-{"version":"1.0","properties":[{"identifier":"recTime","name":"记录时间戳","functionType":"st","accessMode":"r","desc":"定时记录发生时刻的Unix时间戳","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"liftType","name":"电梯类别","functionType":"st","accessMode":"r","desc":"电梯类别码（GB/T 7024）：1-乘客电梯 2-载货电梯 3-自动扶梯 4-自动人行道","dataType":{"type":"enum","specs":{"1":"乘客电梯","2":"载货电梯","3":"自动扶梯","4":"自动人行道"}}},{"identifier":"serviceMode","name":"当前服务模式","functionType":"st","accessMode":"r","desc":"电梯当前服务模式（GB/T 24476）：1-停止服务 2-正常运行 3-检修 4-消防返回 5-消防员运行 6-应急电源运行 7-地震模式 8-未知","dataType":{"type":"enum","specs":{"1":"停止服务","2":"正常运行","3":"检修","4":"消防返回","5":"消防员运行","6":"应急电源运行","7":"地震模式","8":"未知"}}},{"identifier":"carStatus","name":"轿厢运行状态","functionType":"st","accessMode":"r","desc":"轿厢实际运行状态：1-停止（待机或断电） 2-运行","dataType":{"type":"enum","specs":{"1":"停止","2":"运行"}}},{"identifier":"carDirection","name":"轿厢运行方向","functionType":"st","accessMode":"r","desc":"轿厢实际运行方向（非轿厢内指示方向）：1-无方向 2-上行 3-下行","dataType":{"type":"enum","specs":{"1":"无方向","2":"上行","3":"下行"}}},{"identifier":"carPosition","name":"电梯当前楼层","functionType":"st","accessMode":"r","desc":"电梯物理楼层位置，可以为负值（地下层）","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"currentSpeed","name":"运行速度","functionType":"st","accessMode":"r","desc":"轿厢实际运行速度","dataType":{"type":"double","specs":{"min":"0","max":"10","unit":"米每秒 / m/s","step":"0.01"}}},{"identifier":"doorZone","name":"开锁区域","functionType":"st","accessMode":"r","desc":"轿厢是否在开锁区域（仅电梯停止时有效）：1-在开锁区域 2-在非开锁区域","dataType":{"type":"enum","specs":{"1":"在开锁区域","2":"在非开锁区域"}}},{"identifier":"doorStatus","name":"关门到位","functionType":"st","accessMode":"r","desc":"关门到位信号：1-关门到位 2-无关门到位信号","dataType":{"type":"enum","specs":{"1":"关门到位","2":"无关门到位信号"}}},{"identifier":"doorFullStatus","name":"轿门状态","functionType":"st","accessMode":"r","desc":"轿门详细状态：0-未知 1-正在关门 2-关门到位 3-正在开门 4-开门到位 5-门锁锁止 6-保持不完全关闭状态","dataType":{"type":"enum","specs":{"0":"未知","1":"正在关门","2":"关门到位","3":"正在开门","4":"开门到位","5":"门锁锁止","6":"保持不完全关闭"}}},{"identifier":"hallDoorStatus","name":"厅门状态","functionType":"st","accessMode":"r","desc":"厅门门锁状态：true-门锁锁止 false-无门锁锁止信号","dataType":{"type":"bool","specs":{"true":"门锁锁止","false":"无门锁锁止信号"}}},{"identifier":"passengerStatus","name":"轿内是否有人","functionType":"st","accessMode":"r","desc":"轿厢内是否有人","dataType":{"type":"bool","specs":{"true":"有人","false":"无人"}}},{"identifier":"peopleNumber","name":"实时乘梯人数","functionType":"st","accessMode":"r","desc":"轿厢内当前实时乘梯人数","dataType":{"type":"int64","specs":{"min":"0","max":"50","unit":"人 / p","step":"1"}}},{"identifier":"carOverload","name":"轿厢超载","functionType":"st","accessMode":"r","desc":"轿厢是否超载","dataType":{"type":"bool","specs":{"true":"超载","false":"未超载"}}},{"identifier":"liftCarDriveStatus","name":"曳引机状态","functionType":"st","accessMode":"r","desc":"曳引机制动器状态：0-待机 1-制动器提起 2-制动器释放","dataType":{"type":"enum","specs":{"0":"待机","1":"制动器提起","2":"制动器释放"}}},{"identifier":"machineRoomTemp","name":"机房温度","functionType":"st","accessMode":"r","desc":"电梯机房环境温度","dataType":{"type":"double","specs":{"min":"-40","max":"85","unit":"摄氏度 / ℃","step":"0.1"}}},{"identifier":"machineRoomDoorStatus","name":"机房门状态","functionType":"st","accessMode":"r","desc":"机房门开关状态","dataType":{"type":"bool","specs":{"true":"关门","false":"开门"}}},{"identifier":"machineRoomPeopleStatus","name":"机房是否有人","functionType":"st","accessMode":"r","desc":"机房内是否有人","dataType":{"type":"bool","specs":{"true":"有人","false":"无人"}}},{"identifier":"hoistwayTemp","name":"井道温度","functionType":"st","accessMode":"r","desc":"电梯井道环境温度","dataType":{"type":"double","specs":{"min":"-40","max":"85","unit":"摄氏度 / ℃","step":"0.1"}}},{"identifier":"carTemp","name":"轿厢温度","functionType":"st","accessMode":"r","desc":"轿厢内环境温度","dataType":{"type":"double","specs":{"min":"-20","max":"60","unit":"摄氏度 / ℃","step":"0.1"}}},{"identifier":"carHumidity","name":"轿厢湿度","functionType":"st","accessMode":"r","desc":"轿厢内相对湿度","dataType":{"type":"double","specs":{"min":"0","max":"100","unit":"百分比 / %","step":"0.1"}}},{"identifier":"carLightStatus","name":"轿厢照明","functionType":"st","accessMode":"r","desc":"轿厢照明灯状态","dataType":{"type":"bool","specs":{"true":"灯亮","false":"灯灭"}}},{"identifier":"carFanStatus","name":"轿厢风扇","functionType":"st","accessMode":"r","desc":"轿厢风扇状态","dataType":{"type":"bool","specs":{"true":"运行","false":"停止"}}},{"identifier":"accumulativeRunNum","name":"累计运行次数","functionType":"st","accessMode":"r","desc":"电梯累计运行次数或电动机启动次数","dataType":{"type":"int64","specs":{"min":"0","max":"4294967295","unit":"次","step":"1"}}},{"identifier":"accumulativeRunTime","name":"累计运行时间","functionType":"st","accessMode":"r","desc":"电梯累计运行时间","dataType":{"type":"int64","specs":{"min":"0","max":"4294967295","unit":"秒 / s","step":"1"}}},{"identifier":"doorOpenCloseCount","name":"开关门次数","functionType":"st","accessMode":"r","desc":"电梯累计开关门次数","dataType":{"type":"int64","specs":{"min":"0","max":"999999999","unit":"次","step":"1"}}},{"identifier":"travelDistance","name":"累计运行里程","functionType":"st","accessMode":"r","desc":"轿厢累计运行里程","dataType":{"type":"double","specs":{"min":"0","max":"99999999","unit":"千米 / km","step":"0.001"}}},{"identifier":"upTime","name":"连续运行时间","functionType":"st","accessMode":"r","desc":"本次上电后连续运行时长","dataType":{"type":"int64","specs":{"min":"0","max":"1000000","unit":"小时 / h","step":"1"}}},{"identifier":"workTime","name":"累计工作时间","functionType":"st","accessMode":"r","desc":"电梯累计工作总时长","dataType":{"type":"int64","specs":{"min":"0","max":"10000000","unit":"小时 / h","step":"1"}}},{"identifier":"battVolt","name":"备用电池电压","functionType":"st","accessMode":"r","desc":"电梯应急备用电池电压值","dataType":{"type":"double","specs":{"min":"0","max":"60","unit":"伏特 / V","step":"0.01"}}},{"identifier":"battPct","name":"备用电池电量","functionType":"st","accessMode":"r","desc":"应急备用电池剩余电量百分比","dataType":{"type":"double","specs":{"min":"0","max":"100","unit":"百分比 / %","step":"0.1"}}},{"identifier":"rssi","name":"信号强度","functionType":"st","accessMode":"r","desc":"NB-IoT/4G网络信号强度指示","dataType":{"type":"double","specs":{"min":"-150","max":"0","unit":"分贝毫瓦 / dBm","step":"0.1"}}},{"identifier":"rsrp","name":"参考信号接收功率","functionType":"st","accessMode":"r","desc":"LTE参考信号接收功率","dataType":{"type":"double","specs":{"min":"-150","max":"0","unit":"分贝毫瓦 / dBm","step":"0.1"}}},{"identifier":"snr","name":"信噪比","functionType":"st","accessMode":"r","desc":"信号信噪比","dataType":{"type":"double","specs":{"min":"-30","max":"50","unit":"分贝 / dB","step":"0.1"}}},{"identifier":"mainPowerStatus","name":"主电源状态","functionType":"st","accessMode":"r","desc":"电梯主供电电源状态","dataType":{"type":"bool","specs":{"true":"正常","false":"断电"}}},{"identifier":"mainVoltage","name":"主电源电压","functionType":"st","accessMode":"r","desc":"电梯主供电回路电压值","dataType":{"type":"double","specs":{"min":"0","max":"500","unit":"伏特 / V","step":"0.1"}}},{"identifier":"mainCurrent","name":"主回路电流","functionType":"st","accessMode":"r","desc":"电梯主回路实时电流值","dataType":{"type":"double","specs":{"min":"0","max":"1000","unit":"安培 / A","step":"0.01"}}},{"identifier":"motorTemp","name":"曳引机温度","functionType":"st","accessMode":"r","desc":"曳引电动机工作温度","dataType":{"type":"double","specs":{"min":"-40","max":"200","unit":"摄氏度 / ℃","step":"0.1"}}},{"identifier":"brakeStatus","name":"制动器状态","functionType":"st","accessMode":"r","desc":"电梯制动器工作状态：0-释放 1-抱合 2-异常","dataType":{"type":"enum","specs":{"0":"释放","1":"抱合","2":"异常"}}},{"identifier":"readCnt","name":"采集次数","functionType":"st","accessMode":"r","desc":"累计远程数据采集次数","dataType":{"type":"int64","specs":{"min":"0","max":"999999999","unit":"次","step":"1"}}},{"identifier":"lastReadTime","name":"上次采集时间","functionType":"st","accessMode":"r","desc":"上次成功数据采集时刻的Unix时间戳","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"fwVer","name":"固件版本","functionType":"st","accessMode":"r","desc":"采集终端固件版本号（数字形式，如100表示V1.0.0）","dataType":{"type":"int64","specs":{"min":"0","max":"999999","unit":"","step":"1"}}},{"identifier":"overloadAlarm","name":"超载告警","functionType":"st","accessMode":"r","desc":"轿厢载荷超过额定载重量告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"trappedAlarm","name":"困人告警","functionType":"st","accessMode":"r","desc":"轿厢内人员被困告警（运行中停止且门未开）","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"overtopAlarm","name":"冲顶告警","functionType":"st","accessMode":"r","desc":"轿厢冲顶风险告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"bottomAlarm","name":"蹲底告警","functionType":"st","accessMode":"r","desc":"轿厢蹲底风险告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"doorFaultAlarm","name":"门故障告警","functionType":"st","accessMode":"r","desc":"电梯门系统故障告警（开关门异常、门锁异常等）","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"commBreakAlarm","name":"通讯中断告警","functionType":"st","accessMode":"r","desc":"采集终端与平台通讯中断告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"fireAlarm","name":"火警","functionType":"st","accessMode":"r","desc":"电梯区域火灾告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"earthquakeAlarm","name":"地震告警","functionType":"st","accessMode":"r","desc":"地震模式触发告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"powerOffAlarm","name":"断电告警","functionType":"st","accessMode":"r","desc":"主电源断电且备用电池启动告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"suddenStopAlarm","name":"急停告警","functionType":"st","accessMode":"r","desc":"电梯非正常急停告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"speedAbnormalAlarm","name":"速度异常告警","functionType":"st","accessMode":"r","desc":"轿厢运行速度超出额定范围告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"doorBlockAlarm","name":"阻门告警","functionType":"st","accessMode":"r","desc":"人为阻拦电梯门关闭告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"ebikeAlarm","name":"电动车入梯告警","functionType":"st","accessMode":"r","desc":"检测到电动自行车进入轿厢告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}},{"identifier":"maintAlarm","name":"维保异常告警","functionType":"st","accessMode":"r","desc":"维保超期或维保异常告警","dataType":{"type":"bool","specs":{"true":"告警","false":"正常"}}}],"events":[{"identifier":"fault_event","name":"故障事件","functionType":"st","eventType":"error","desc":"","outputData":[{"identifier":"fault_code","name":"故障编码","dataType":{"type":"string","specs":{"length":20}}},{"identifier":"fault_name","name":"故障名称","dataType":{"type":"string","specs":{"length":50}}},{"identifier":"fault_level","name":"故障等级","dataType":{"type":"enum","specs":{"1":"严重","2":"一般","3":"轻微"}}},{"identifier":"fault_time","name":"故障发生时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"fault_floor","name":"故障发生楼层","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"fault_desc","name":"故障描述","dataType":{"type":"string","specs":{"length":200}}}]},{"identifier":"fault_recovery_event","name":"故障恢复事件","functionType":"st","eventType":"info","desc":"","outputData":[{"identifier":"fault_code","name":"故障编码","dataType":{"type":"string","specs":{"length":20}}},{"identifier":"recovery_time","name":"恢复时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}}]},{"identifier":"alarm_event","name":"告警事件","functionType":"st","eventType":"alert","desc":"","outputData":[{"identifier":"alarm_type","name":"告警类型","dataType":{"type":"enum","specs":{"1":"超载告警","2":"困人告警","3":"冲顶告警","4":"蹲底告警","5":"门故障告警","6":"通讯中断告警","7":"火警告警","8":"地震告警","9":"断电告警","10":"急停告警","11":"速度异常告警","12":"阻门告警","13":"电动车入梯告警","14":"维保异常告警"}}},{"identifier":"alarm_level","name":"告警级别","dataType":{"type":"enum","specs":{"1":"紧急","2":"重要","3":"一般"}}},{"identifier":"alarm_time","name":"告警触发时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"alarm_floor","name":"告警触发楼层","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"alarm_value","name":"告警值","dataType":{"type":"string","specs":{"length":50}}},{"identifier":"alarm_desc","name":"告警描述","dataType":{"type":"string","specs":{"length":200}}}]},{"identifier":"run_record","name":"运行记录事件","functionType":"st","eventType":"info","desc":"","outputData":[{"identifier":"start_floor","name":"起始楼层","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"end_floor","name":"到达楼层","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"direction","name":"运行方向","dataType":{"type":"enum","specs":{"1":"上行","2":"下行"}}},{"identifier":"start_time","name":"运行开始时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"end_time","name":"运行结束时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"run_distance","name":"本次运行距离","dataType":{"type":"double","specs":{"min":"0","max":"9999","unit":"米 / m","step":"0.01"}}}]},{"identifier":"door_record","name":"开关门记录事件","functionType":"st","eventType":"info","desc":"","outputData":[{"identifier":"door_action","name":"门动作","dataType":{"type":"enum","specs":{"1":"开门","2":"关门"}}},{"identifier":"door_floor","name":"发生楼层","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"door_time","name":"动作时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}}]},{"identifier":"trapped_event","name":"困人事件","functionType":"st","eventType":"alert","desc":"","outputData":[{"identifier":"trapped_floor","name":"困人楼层","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"trapped_time","name":"困人发生时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"passenger_count","name":"被困人数","dataType":{"type":"int64","specs":{"min":"0","max":"50","unit":"人 / p","step":"1"}}},{"identifier":"trapped_duration","name":"被困持续时长","dataType":{"type":"int64","specs":{"min":"0","max":"86400","unit":"秒 / s","step":"1"}}}]},{"identifier":"maintenance_event","name":"维保事件","functionType":"st","eventType":"info","desc":"","outputData":[{"identifier":"maint_type","name":"维保类型","dataType":{"type":"enum","specs":{"1":"半月保","2":"季度保","3":"半年保","4":"年度保","5":"应急维修"}}},{"identifier":"maint_status","name":"维保状态","dataType":{"type":"enum","specs":{"1":"维保开始","2":"维保结束","3":"维保到期提醒"}}},{"identifier":"maint_time","name":"维保时间","dataType":{"type":"int64","specs":{"min":"1","max":"100000000000","unit":"","step":"1"}}},{"identifier":"maint_personnel","name":"维保人员","dataType":{"type":"string","specs":{"length":30}}},{"identifier":"maint_remark","name":"维保备注","dataType":{"type":"string","specs":{"length":200}}}]}],"services":[{"identifier":"remote_reset","name":"远程复位","functionType":"st","desc":"","callType":"async","input":[{"identifier":"reset_type","name":"复位类型","dataType":{"type":"enum","specs":{"1":"仅清除故障标志","2":"重启控制器"}}}],"output":[{"identifier":"result","name":"复位结果","dataType":{"type":"enum","specs":{"0":"复位成功","1":"复位失败-电梯运行中","2":"复位失败-存在不可复位故障","3":"复位失败-设备离线"}}}]},{"identifier":"emergency_call","name":"紧急召梯","functionType":"st","desc":"","callType":"async","input":[{"identifier":"target_floor","name":"目标楼层","dataType":{"type":"int64","specs":{"min":"-20","max":"200","unit":"层 / F","step":"1"}}},{"identifier":"call_type","name":"召梯类型","dataType":{"type":"enum","specs":{"1":"消防召梯","2":"应急召梯","3":"管理员召梯"}}}],"output":[{"identifier":"result","name":"召梯结果","dataType":{"type":"enum","specs":{"0":"召梯成功","1":"召梯失败-电梯不在线","2":"召梯失败-当前模式不支持","3":"召梯失败-楼层无效"}}}]},{"identifier":"door_control","name":"远程门控","functionType":"st","desc":"","callType":"async","input":[{"identifier":"action","name":"门控动作","dataType":{"type":"enum","specs":{"1":"开门","2":"关门"}}},{"identifier":"duration","name":"门保持时长","dataType":{"type":"int64","specs":{"min":"0","max":"120","unit":"秒 / s","step":"1"}}}],"output":[{"identifier":"result","name":"门控结果","dataType":{"type":"enum","specs":{"0":"操作成功","1":"操作失败-电梯运行中","2":"操作失败-不在平层","3":"操作失败-设备离线"}}}]},{"identifier":"set_service_mode","name":"设置服务模式","functionType":"st","desc":"","callType":"async","input":[{"identifier":"target_mode","name":"目标模式","dataType":{"type":"enum","specs":{"1":"停止服务","2":"正常运行","3":"检修模式","4":"消防返回","5":"消防员运行","6":"应急电源运行"}}}],"output":[{"identifier":"result","name":"模式切换结果","dataType":{"type":"enum","specs":{"0":"切换成功","1":"切换失败-当前状态不允许","2":"切换失败-设备离线","3":"切换失败-模式不支持"}}}]},{"identifier":"floor_lock","name":"楼层锁定","functionType":"st","desc":"","callType":"async","input":[{"identifier":"action","name":"锁定动作","dataType":{"type":"enum","specs":{"1":"锁定","2":"解锁"}}},{"identifier":"floors","name":"楼层列表","dataType":{"type":"string","specs":{"length":100}}}],"output":[{"identifier":"result","name":"锁定结果","dataType":{"type":"enum","specs":{"0":"操作成功","1":"操作失败-部分楼层无效","2":"操作失败-设备离线"}}},{"identifier":"locked_floors","name":"当前已锁定楼层","dataType":{"type":"string","specs":{"length":100}}}]}],"profile":{"stTmId":"6a7032fe74fe8b172a54b512","name":"dict智能电梯"}}
+{
+    "version": "1.0",
+    "properties": [
+        {
+            "identifier": "recTime",
+            "name": "记录时间戳",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "定时记录发生时刻的Unix时间戳",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "1",
+                    "max": "100000000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "liftType",
+            "name": "电梯类别",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯类别码（GB/T 7024）：1-乘客电梯 2-载货电梯 3-自动扶梯 4-自动人行道",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "1": "乘客电梯",
+                    "2": "载货电梯",
+                    "3": "自动扶梯",
+                    "4": "自动人行道"
+                }
+            }
+        },
+        {
+            "identifier": "serviceMode",
+            "name": "当前服务模式",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯当前服务模式（GB/T 24476）：1-停止服务 2-正常运行 3-检修 4-消防返回 5-消防员运行 6-应急电源运行 7-地震模式 8-未知",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "1": "停止服务",
+                    "2": "正常运行",
+                    "3": "检修",
+                    "4": "消防返回",
+                    "5": "消防员运行",
+                    "6": "应急电源运行",
+                    "7": "地震模式",
+                    "8": "未知"
+                }
+            }
+        },
+        {
+            "identifier": "carStatus",
+            "name": "轿厢运行状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢实际运行状态：1-停止（待机或断电） 2-运行",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "1": "停止",
+                    "2": "运行"
+                }
+            }
+        },
+        {
+            "identifier": "carDirection",
+            "name": "轿厢运行方向",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢实际运行方向（非轿厢内指示方向）：1-无方向 2-上行 3-下行",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "1": "无方向",
+                    "2": "上行",
+                    "3": "下行"
+                }
+            }
+        },
+        {
+            "identifier": "carPosition",
+            "name": "电梯当前楼层",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯物理楼层位置，可以为负值（地下层）",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "-20",
+                    "max": "200",
+                    "unit": "层 / F",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "currentSpeed",
+            "name": "运行速度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢实际运行速度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "10",
+                    "unit": "米每秒 / m/s",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "doorZone",
+            "name": "开锁区域",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢是否在开锁区域（仅电梯停止时有效）：1-在开锁区域 2-在非开锁区域",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "1": "在开锁区域",
+                    "2": "在非开锁区域"
+                }
+            }
+        },
+        {
+            "identifier": "doorStatus",
+            "name": "关门到位",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "关门到位信号：1-关门到位 2-无关门到位信号",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "1": "关门到位",
+                    "2": "无关门到位信号"
+                }
+            }
+        },
+        {
+            "identifier": "doorFullStatus",
+            "name": "轿门状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿门详细状态：0-未知 1-正在关门 2-关门到位 3-正在开门 4-开门到位 5-门锁锁止 6-保持不完全关闭状态",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "0": "未知",
+                    "1": "正在关门",
+                    "2": "关门到位",
+                    "3": "正在开门",
+                    "4": "开门到位",
+                    "5": "门锁锁止",
+                    "6": "保持不完全关闭"
+                }
+            }
+        },
+        {
+            "identifier": "hallDoorStatus",
+            "name": "厅门状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "厅门门锁状态：true-门锁锁止 false-无门锁锁止信号",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "门锁锁止",
+                    "false": "无门锁锁止信号"
+                }
+            }
+        },
+        {
+            "identifier": "passengerStatus",
+            "name": "轿内是否有人",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢内是否有人",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "有人",
+                    "false": "无人"
+                }
+            }
+        },
+        {
+            "identifier": "peopleNumber",
+            "name": "实时乘梯人数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢内当前实时乘梯人数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "50",
+                    "unit": "人 / p",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "carOverload",
+            "name": "轿厢超载",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢是否超载",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "超载",
+                    "false": "未超载"
+                }
+            }
+        },
+        {
+            "identifier": "liftCarDriveStatus",
+            "name": "曳引机状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "曳引机制动器状态：0-待机 1-制动器提起 2-制动器释放",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "0": "待机",
+                    "1": "制动器提起",
+                    "2": "制动器释放"
+                }
+            }
+        },
+        {
+            "identifier": "machineRoomTemp",
+            "name": "机房温度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯机房环境温度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-40",
+                    "max": "85",
+                    "unit": "摄氏度 / ℃",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "machineRoomDoorStatus",
+            "name": "机房门状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "机房门开关状态",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "关门",
+                    "false": "开门"
+                }
+            }
+        },
+        {
+            "identifier": "machineRoomPeopleStatus",
+            "name": "机房是否有人",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "机房内是否有人",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "有人",
+                    "false": "无人"
+                }
+            }
+        },
+        {
+            "identifier": "hoistwayTemp",
+            "name": "井道温度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯井道环境温度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-40",
+                    "max": "85",
+                    "unit": "摄氏度 / ℃",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "carTemp",
+            "name": "轿厢温度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢内环境温度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-20",
+                    "max": "60",
+                    "unit": "摄氏度 / ℃",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "carHumidity",
+            "name": "轿厢湿度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢内相对湿度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "百分比 / %",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "carLightStatus",
+            "name": "轿厢照明",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢照明灯状态",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "灯亮",
+                    "false": "灯灭"
+                }
+            }
+        },
+        {
+            "identifier": "carFanStatus",
+            "name": "轿厢风扇",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢风扇状态",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "运行",
+                    "false": "停止"
+                }
+            }
+        },
+        {
+            "identifier": "accumulativeRunNum",
+            "name": "累计运行次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯累计运行次数或电动机启动次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "4294967295",
+                    "unit": "次",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "accumulativeRunTime",
+            "name": "累计运行时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯累计运行时间",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "4294967295",
+                    "unit": "秒 / s",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "doorOpenCloseCount",
+            "name": "开关门次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯累计开关门次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "999999999",
+                    "unit": "次",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "travelDistance",
+            "name": "累计运行里程",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢累计运行里程",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "99999999",
+                    "unit": "千米 / km",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "upTime",
+            "name": "连续运行时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "本次上电后连续运行时长",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "小时 / h",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "workTime",
+            "name": "累计工作时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯累计工作总时长",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "10000000",
+                    "unit": "小时 / h",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "battVolt",
+            "name": "备用电池电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯应急备用电池电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "60",
+                    "unit": "伏特 / V",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "battPct",
+            "name": "备用电池电量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "应急备用电池剩余电量百分比",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "百分比 / %",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "rssi",
+            "name": "信号强度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "NB-IoT/4G网络信号强度指示",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-150",
+                    "max": "0",
+                    "unit": "分贝毫瓦 / dBm",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "rsrp",
+            "name": "参考信号接收功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "LTE参考信号接收功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-150",
+                    "max": "0",
+                    "unit": "分贝毫瓦 / dBm",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "snr",
+            "name": "信噪比",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "信号信噪比",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-30",
+                    "max": "50",
+                    "unit": "分贝 / dB",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "mainPowerStatus",
+            "name": "主电源状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯主供电电源状态",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "正常",
+                    "false": "断电"
+                }
+            }
+        },
+        {
+            "identifier": "mainVoltage",
+            "name": "主电源电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯主供电回路电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "500",
+                    "unit": "伏特 / V",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "mainCurrent",
+            "name": "主回路电流",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯主回路实时电流值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "安培 / A",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "motorTemp",
+            "name": "曳引机温度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "曳引电动机工作温度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-40",
+                    "max": "200",
+                    "unit": "摄氏度 / ℃",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "brakeStatus",
+            "name": "制动器状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯制动器工作状态：0-释放 1-抱合 2-异常",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "0": "释放",
+                    "1": "抱合",
+                    "2": "异常"
+                }
+            }
+        },
+        {
+            "identifier": "readCnt",
+            "name": "采集次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "累计远程数据采集次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "999999999",
+                    "unit": "次",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "lastReadTime",
+            "name": "上次采集时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "上次成功数据采集时刻的Unix时间戳",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "1",
+                    "max": "100000000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "fwVer",
+            "name": "固件版本",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "采集终端固件版本号（数字形式，如100表示V1.0.0）",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "999999",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "overloadAlarm",
+            "name": "超载告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢载荷超过额定载重量告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "trappedAlarm",
+            "name": "困人告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢内人员被困告警（运行中停止且门未开）",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "overtopAlarm",
+            "name": "冲顶告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢冲顶风险告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "bottomAlarm",
+            "name": "蹲底告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢蹲底风险告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "doorFaultAlarm",
+            "name": "门故障告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯门系统故障告警（开关门异常、门锁异常等）",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "commBreakAlarm",
+            "name": "通讯中断告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "采集终端与平台通讯中断告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "fireAlarm",
+            "name": "火警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯区域火灾告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "earthquakeAlarm",
+            "name": "地震告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "地震模式触发告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "powerOffAlarm",
+            "name": "断电告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "主电源断电且备用电池启动告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "suddenStopAlarm",
+            "name": "急停告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电梯非正常急停告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "speedAbnormalAlarm",
+            "name": "速度异常告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "轿厢运行速度超出额定范围告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "doorBlockAlarm",
+            "name": "阻门告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "人为阻拦电梯门关闭告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "ebikeAlarm",
+            "name": "电动车入梯告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "检测到电动自行车进入轿厢告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "maintAlarm",
+            "name": "维保异常告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "维保超期或维保异常告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        }
+    ],
+    "events": [
+        {
+            "identifier": "fault_event",
+            "name": "故障事件",
+            "functionType": "st",
+            "eventType": "error",
+            "desc": "",
+            "outputData": [
+                {
+                    "identifier": "fault_code",
+                    "name": "故障编码",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 20
+                        }
+                    }
+                },
+                {
+                    "identifier": "fault_name",
+                    "name": "故障名称",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 50
+                        }
+                    }
+                },
+                {
+                    "identifier": "fault_level",
+                    "name": "故障等级",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "严重",
+                            "2": "一般",
+                            "3": "轻微"
+                        }
+                    }
+                },
+                {
+                    "identifier": "fault_time",
+                    "name": "故障发生时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "fault_floor",
+                    "name": "故障发生楼层",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "-20",
+                            "max": "200",
+                            "unit": "层 / F",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "fault_desc",
+                    "name": "故障描述",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 200
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "fault_recovery_event",
+            "name": "故障恢复事件",
+            "functionType": "st",
+            "eventType": "info",
+            "desc": "",
+            "outputData": [
+                {
+                    "identifier": "fault_code",
+                    "name": "故障编码",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 20
+                        }
+                    }
+                },
+                {
+                    "identifier": "recovery_time",
+                    "name": "恢复时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "alarm_event",
+            "name": "告警事件",
+            "functionType": "st",
+            "eventType": "alert",
+            "desc": "",
+            "outputData": [
+                {
+                    "identifier": "alarm_type",
+                    "name": "告警类型",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "超载告警",
+                            "2": "困人告警",
+                            "3": "冲顶告警",
+                            "4": "蹲底告警",
+                            "5": "门故障告警",
+                            "6": "通讯中断告警",
+                            "7": "火警告警",
+                            "8": "地震告警",
+                            "9": "断电告警",
+                            "10": "急停告警",
+                            "11": "速度异常告警",
+                            "12": "阻门告警",
+                            "13": "电动车入梯告警",
+                            "14": "维保异常告警"
+                        }
+                    }
+                },
+                {
+                    "identifier": "alarm_level",
+                    "name": "告警级别",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "紧急",
+                            "2": "重要",
+                            "3": "一般"
+                        }
+                    }
+                },
+                {
+                    "identifier": "alarm_time",
+                    "name": "告警触发时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "alarm_floor",
+                    "name": "告警触发楼层",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "-20",
+                            "max": "200",
+                            "unit": "层 / F",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "alarm_value",
+                    "name": "告警值",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 50
+                        }
+                    }
+                },
+                {
+                    "identifier": "alarm_desc",
+                    "name": "告警描述",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 200
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "run_record",
+            "name": "运行记录事件",
+            "functionType": "st",
+            "eventType": "info",
+            "desc": "",
+            "outputData": [
+                {
+                    "identifier": "start_floor",
+                    "name": "起始楼层",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "-20",
+                            "max": "200",
+                            "unit": "层 / F",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "end_floor",
+                    "name": "到达楼层",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "-20",
+                            "max": "200",
+                            "unit": "层 / F",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "direction",
+                    "name": "运行方向",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "上行",
+                            "2": "下行"
+                        }
+                    }
+                },
+                {
+                    "identifier": "start_time",
+                    "name": "运行开始时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "end_time",
+                    "name": "运行结束时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "run_distance",
+                    "name": "本次运行距离",
+                    "dataType": {
+                        "type": "double",
+                        "specs": {
+                            "min": "0",
+                            "max": "9999",
+                            "unit": "米 / m",
+                            "step": "0.01"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "door_record",
+            "name": "开关门记录事件",
+            "functionType": "st",
+            "eventType": "info",
+            "desc": "",
+            "outputData": [
+                {
+                    "identifier": "door_action",
+                    "name": "门动作",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "开门",
+                            "2": "关门"
+                        }
+                    }
+                },
+                {
+                    "identifier": "door_floor",
+                    "name": "发生楼层",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "-20",
+                            "max": "200",
+                            "unit": "层 / F",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "door_time",
+                    "name": "动作时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "trapped_event",
+            "name": "困人事件",
+            "functionType": "st",
+            "eventType": "alert",
+            "desc": "",
+            "outputData": [
+                {
+                    "identifier": "trapped_floor",
+                    "name": "困人楼层",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "-20",
+                            "max": "200",
+                            "unit": "层 / F",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "trapped_time",
+                    "name": "困人发生时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "passenger_count",
+                    "name": "被困人数",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "0",
+                            "max": "50",
+                            "unit": "人 / p",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "trapped_duration",
+                    "name": "被困持续时长",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "0",
+                            "max": "86400",
+                            "unit": "秒 / s",
+                            "step": "1"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "maintenance_event",
+            "name": "维保事件",
+            "functionType": "st",
+            "eventType": "info",
+            "desc": "",
+            "outputData": [
+                {
+                    "identifier": "maint_type",
+                    "name": "维保类型",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "半月保",
+                            "2": "季度保",
+                            "3": "半年保",
+                            "4": "年度保",
+                            "5": "应急维修"
+                        }
+                    }
+                },
+                {
+                    "identifier": "maint_status",
+                    "name": "维保状态",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "维保开始",
+                            "2": "维保结束",
+                            "3": "维保到期提醒"
+                        }
+                    }
+                },
+                {
+                    "identifier": "maint_time",
+                    "name": "维保时间",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "1",
+                            "max": "100000000000",
+                            "unit": "",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "maint_personnel",
+                    "name": "维保人员",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 30
+                        }
+                    }
+                },
+                {
+                    "identifier": "maint_remark",
+                    "name": "维保备注",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 200
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "services": [
+        {
+            "identifier": "remote_reset",
+            "name": "远程复位",
+            "functionType": "st",
+            "desc": "",
+            "callType": "async",
+            "input": [
+                {
+                    "identifier": "reset_type",
+                    "name": "复位类型",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "仅清除故障标志",
+                            "2": "重启控制器"
+                        }
+                    }
+                }
+            ],
+            "output": [
+                {
+                    "identifier": "result",
+                    "name": "复位结果",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "0": "复位成功",
+                            "1": "复位失败-电梯运行中",
+                            "2": "复位失败-存在不可复位故障",
+                            "3": "复位失败-设备离线"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "emergency_call",
+            "name": "紧急召梯",
+            "functionType": "st",
+            "desc": "",
+            "callType": "async",
+            "input": [
+                {
+                    "identifier": "target_floor",
+                    "name": "目标楼层",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "-20",
+                            "max": "200",
+                            "unit": "层 / F",
+                            "step": "1"
+                        }
+                    }
+                },
+                {
+                    "identifier": "call_type",
+                    "name": "召梯类型",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "消防召梯",
+                            "2": "应急召梯",
+                            "3": "管理员召梯"
+                        }
+                    }
+                }
+            ],
+            "output": [
+                {
+                    "identifier": "result",
+                    "name": "召梯结果",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "0": "召梯成功",
+                            "1": "召梯失败-电梯不在线",
+                            "2": "召梯失败-当前模式不支持",
+                            "3": "召梯失败-楼层无效"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "door_control",
+            "name": "远程门控",
+            "functionType": "st",
+            "desc": "",
+            "callType": "async",
+            "input": [
+                {
+                    "identifier": "action",
+                    "name": "门控动作",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "开门",
+                            "2": "关门"
+                        }
+                    }
+                },
+                {
+                    "identifier": "duration",
+                    "name": "门保持时长",
+                    "dataType": {
+                        "type": "int64",
+                        "specs": {
+                            "min": "0",
+                            "max": "120",
+                            "unit": "秒 / s",
+                            "step": "1"
+                        }
+                    }
+                }
+            ],
+            "output": [
+                {
+                    "identifier": "result",
+                    "name": "门控结果",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "0": "操作成功",
+                            "1": "操作失败-电梯运行中",
+                            "2": "操作失败-不在平层",
+                            "3": "操作失败-设备离线"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "set_service_mode",
+            "name": "设置服务模式",
+            "functionType": "st",
+            "desc": "",
+            "callType": "async",
+            "input": [
+                {
+                    "identifier": "target_mode",
+                    "name": "目标模式",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "停止服务",
+                            "2": "正常运行",
+                            "3": "检修模式",
+                            "4": "消防返回",
+                            "5": "消防员运行",
+                            "6": "应急电源运行"
+                        }
+                    }
+                }
+            ],
+            "output": [
+                {
+                    "identifier": "result",
+                    "name": "模式切换结果",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "0": "切换成功",
+                            "1": "切换失败-当前状态不允许",
+                            "2": "切换失败-设备离线",
+                            "3": "切换失败-模式不支持"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "identifier": "floor_lock",
+            "name": "楼层锁定",
+            "functionType": "st",
+            "desc": "",
+            "callType": "async",
+            "input": [
+                {
+                    "identifier": "action",
+                    "name": "锁定动作",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "1": "锁定",
+                            "2": "解锁"
+                        }
+                    }
+                },
+                {
+                    "identifier": "floors",
+                    "name": "楼层列表",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 100
+                        }
+                    }
+                }
+            ],
+            "output": [
+                {
+                    "identifier": "result",
+                    "name": "锁定结果",
+                    "dataType": {
+                        "type": "enum",
+                        "specs": {
+                            "0": "操作成功",
+                            "1": "操作失败-部分楼层无效",
+                            "2": "操作失败-设备离线"
+                        }
+                    }
+                },
+                {
+                    "identifier": "locked_floors",
+                    "name": "当前已锁定楼层",
+                    "dataType": {
+                        "type": "string",
+                        "specs": {
+                            "length": 100
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "profile": {
+        "stTmId": "6a7032fe74fe8b172a54b512",
+        "name": "dict智能电梯"
+    }
+}

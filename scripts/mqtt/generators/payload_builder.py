@@ -28,7 +28,7 @@ def _now_ts() -> int:
 # ====== 设备类型 → JSON 文件映射 ======
 
 DEVICE_TYPE_MAP: dict[str, str] = {
-    "water_meter": "water_meter_report_.json",
+    "water_meter": "water_meter_report.json",
     "electric_meter": "electric_meter_report.json",
     "elevator": "elevator_report.json",
 }
