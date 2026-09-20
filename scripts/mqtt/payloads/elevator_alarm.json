@@ -1,0 +1,14 @@
+    {
+        "cmd": "EventData",
+        "ts": 1789635300,
+        "SN": "342401003",
+        "group": 1,
+        "data": {
+            "fault_code": "E03",
+            "fault_name": "编码器信号异常",
+            "fault_level": 2,
+            "fault_time": 1789635300,
+            "fault_floor": 4,
+            "fault_desc": "编码器线缆断线"
+        }
+    }

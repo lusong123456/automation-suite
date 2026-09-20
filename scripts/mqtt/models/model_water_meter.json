@@ -1,0 +1,710 @@
+{
+    "version": "1.0",
+    "properties": [
+        {
+            "identifier": "recTime",
+            "name": "记录时间戳",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "定时记录发生时刻的Unix时间戳",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "1",
+                    "max": "100000000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "totalFlow",
+            "name": "总累计流量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "水表总累计用水量（总累积量）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "99999999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowPos",
+            "name": "正向累计流量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "正向累计用水量",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "99999999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowNeg",
+            "name": "反向累计流量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "反向累计用水量（逆流量）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "99999999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowNet",
+            "name": "净累计流量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "净累计流量（正向流量减去反向流量）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-99999999.9999",
+                    "max": "99999999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "instFlow",
+            "name": "瞬时流量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "当前瞬时流量值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "9999.999",
+                    "unit": "立方米每小时 / m3h",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "flowRate",
+            "name": "瞬时流速",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "当前管道内瞬时流速",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "米每秒 / ms",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "flowToday",
+            "name": "今日用水量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "当日0点至当前的累计用水量",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "99999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowMonth",
+            "name": "本月用水量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "本月1号至当前的累计用水量",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "999999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowLastMonth",
+            "name": "上月用水量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "上一个自然月的累计用水量",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "999999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowSettle",
+            "name": "结算周期用水量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "当前结算周期内的累计用水量",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "999999.9999",
+                    "unit": "立方米 / m3",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "dayMaxFlow",
+            "name": "日最大瞬时流量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "当日记录的最大瞬时流量值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "9999.999",
+                    "unit": "立方米每小时 / m3h",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "dayMaxFlowTime",
+            "name": "日最大流量时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "当日最大瞬时流量发生时刻的Unix时间戳",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "1",
+                    "max": "100000000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "battVolt",
+            "name": "计量电池电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "计量模块电池电压值，监测精度0.01V",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "15",
+                    "unit": "伏特 / V",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "commBattVolt",
+            "name": "通信电池电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "通信模块电池电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "15",
+                    "unit": "伏特 / V",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "battPct",
+            "name": "电池电量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电池剩余电量百分比",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "百分比 / %",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "rssi",
+            "name": "信号强度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "NB-IoT网络信号强度指示",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-150",
+                    "max": "0",
+                    "unit": "分贝毫瓦 / dBm",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "rsrp",
+            "name": "参考信号接收功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "LTE参考信号接收功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-150",
+                    "max": "0",
+                    "unit": "分贝毫瓦 / dBm",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "snr",
+            "name": "信噪比",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "信号信噪比",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-30",
+                    "max": "50",
+                    "unit": "分贝 / dB",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "waterTemp",
+            "name": "水温",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "管道内水的瞬时温度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-20",
+                    "max": "120",
+                    "unit": "摄氏度 / C",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "envTemp",
+            "name": "环境温度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "表具工作环境温度",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-40",
+                    "max": "85",
+                    "unit": "摄氏度 / C",
+                    "step": "0.1"
+                }
+            }
+        },
+        {
+            "identifier": "pressure",
+            "name": "管道压力",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "管道内水压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "10",
+                    "unit": "兆帕 / MPa",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "flowQ1",
+            "name": "最小流量Q1",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "最小流量Q1，水表在最大允许误差内工作的最小流量值（GB/T 778.1）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "9999.999",
+                    "unit": "立方米每小时 / m3h",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowQ2",
+            "name": "分界流量Q2",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "分界流量Q2，将流量范围分成两个区，各区有不同误差限（GB/T 778.1）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "9999.999",
+                    "unit": "立方米每小时 / m3h",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowQ3",
+            "name": "常用流量Q3",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "常用流量Q3，额定工作条件下的流量，也称额定流量（GB/T 778.1）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "99999.999",
+                    "unit": "立方米每小时 / m3h",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "flowQ4",
+            "name": "过载流量Q4",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "过载流量Q4，短时间内允许通过的最大流量值（GB/T 778.1）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "99999.999",
+                    "unit": "立方米每小时 / m3h",
+                    "step": "0.0001"
+                }
+            }
+        },
+        {
+            "identifier": "meterDn",
+            "name": "公称口径",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "水表公称口径（DN），如DN15、DN20、DN25等",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "8",
+                    "max": "500",
+                    "unit": "毫米 / mm",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "valveSt",
+            "name": "阀门状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "水表阀门当前状态",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "0": "关闭",
+                    "1": "开启",
+                    "2": "异常",
+                    "3": "动作中"
+                }
+            }
+        },
+        {
+            "identifier": "meterSt",
+            "name": "表计状态",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "表计整体工作状态",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "0": "正常",
+                    "1": "故障",
+                    "2": "维护",
+                    "3": "离线"
+                }
+            }
+        },
+        {
+            "identifier": "flowDir",
+            "name": "流向",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "当前水流方向",
+            "dataType": {
+                "type": "enum",
+                "specs": {
+                    "0": "静止",
+                    "1": "正向",
+                    "2": "反向"
+                }
+            }
+        },
+        {
+            "identifier": "pulseEq",
+            "name": "脉冲当量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "每个脉冲对应的用水量（发讯当量）",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "升每脉冲 / Lpulse",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "lowBattAlarm",
+            "name": "电池欠压告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电池电压低于阈值告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "valveFaultAlarm",
+            "name": "阀门故障告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "阀门堵转或驱动异常告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "magInterAlarm",
+            "name": "磁干扰告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "检测到强磁干扰告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "dismAlarm",
+            "name": "拆卸告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "表具被拆卸或通讯线断路告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "overFlowAlarm",
+            "name": "过流告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "流量超过设定阈值告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "leakAlarm",
+            "name": "漏水告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "持续小流量判定为管道漏水告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "pipeBreakAlarm",
+            "name": "爆管告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "流量突增判定为管道破裂告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "revFlowAlarm",
+            "name": "反向流告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "检测到反向水流告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "noFlowAlarm",
+            "name": "长时间无流量告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "长时间无流量用水异常告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "pulseFaultAlarm",
+            "name": "脉冲故障告警",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "脉冲信号采集模块故障告警",
+            "dataType": {
+                "type": "bool",
+                "specs": {
+                    "true": "告警",
+                    "false": "正常"
+                }
+            }
+        },
+        {
+            "identifier": "upTime",
+            "name": "连续运行时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "本次上电后连续运行时长",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "小时 / h",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "workTime",
+            "name": "累计工作时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "表计累计工作总时长",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "10000000",
+                    "unit": "小时 / h",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "readCnt",
+            "name": "抄表次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "累计远程抄表次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "999999999",
+                    "unit": "次",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "lastReadTime",
+            "name": "上次抄表时间",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "上次成功抄表时刻的Unix时间戳",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "1",
+                    "max": "100000000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        }
+    ],
+    "events": [],
+    "services": [],
+    "profile": {
+        "stTmId": "6a5d7cfa413efe32c8fbfc4a",
+        "name": "智能水表"
+    }
+}

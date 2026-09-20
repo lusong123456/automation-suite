@@ -1,0 +1,795 @@
+{
+    "version": "1.0",
+    "properties": [
+        {
+            "identifier": "recTime",
+            "name": "记录时间戳",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "定时记录发生时刻的Unix时间戳",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "1",
+                    "max": "100000000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "Ua",
+            "name": "A相电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Ub",
+            "name": "B相电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Uc",
+            "name": "C相电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Uab",
+            "name": "AB线电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "AB线电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Ubc",
+            "name": "BC线电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "BC线电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Uca",
+            "name": "CA线电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "CA线电压值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Ia",
+            "name": "A相电流",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相电流值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "10000",
+                    "unit": "安培 / A",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Ib",
+            "name": "B相电流",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相电流值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "10000",
+                    "unit": "安培 / A",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Ic",
+            "name": "C相电流",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相电流值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "10000",
+                    "unit": "安培 / A",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Pa",
+            "name": "A相有功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相有功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千瓦 / kW",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Pb",
+            "name": "B相有功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相有功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千瓦 / kW",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Pc",
+            "name": "C相有功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相有功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千瓦 / kW",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "P",
+            "name": "总有功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "三相总有功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千瓦 / kW",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Qa",
+            "name": "A相无功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相无功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千乏 / kvar",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Qb",
+            "name": "B相无功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相无功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千乏 / kvar",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Qc",
+            "name": "C相无功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相无功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千乏 / kvar",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Q",
+            "name": "总无功功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "三相总无功功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1000000",
+                    "max": "1000000",
+                    "unit": "千乏 / kvar",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Sa",
+            "name": "A相视在功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相视在功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "千伏安 / kVA",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Sb",
+            "name": "B相视在功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相视在功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "千伏安 / kVA",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Sc",
+            "name": "C相视在功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相视在功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "千伏安 / kVA",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Stot",
+            "name": "总视在功率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "三相总视在功率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "千伏安 / kVA",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "PFa",
+            "name": "A相功率因数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相功率因数",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1",
+                    "max": "1",
+                    "unit": "",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "PFb",
+            "name": "B相功率因数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相功率因数",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1",
+                    "max": "1",
+                    "unit": "",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "PFc",
+            "name": "C相功率因数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相功率因数",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1",
+                    "max": "1",
+                    "unit": "",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "PFtot",
+            "name": "总功率因数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "总功率因数",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "-1",
+                    "max": "1",
+                    "unit": "",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Hz",
+            "name": "频率",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电网频率",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "赫兹 / Hz",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Ulnavg",
+            "name": "平均相电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "三相平均相电压",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Ullavg",
+            "name": "平均线电压",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "三相平均线电压",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "伏特 / V",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Iavg",
+            "name": "平均相电流",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "三相平均相电流",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "10000",
+                    "unit": "安培 / A",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Inc",
+            "name": "中性线电流",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "计算中性线电流",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "10000",
+                    "unit": "安培 / A",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "kWhImp",
+            "name": "正向有功电能",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "正向有功电能累计值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100000000",
+                    "unit": "千瓦时 / kW·h",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "kWhExp",
+            "name": "反向有功电能",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "反向有功电能累计值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100000000",
+                    "unit": "千瓦时 / kW·h",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "kvarhImp",
+            "name": "正向无功电能",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "正向无功电能累计值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100000000",
+                    "unit": "千乏时 / kvar·h",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "kvarhExp",
+            "name": "反向无功电能",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "反向无功电能累计值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100000000",
+                    "unit": "千乏时 / kvar·h",
+                    "step": "0.01"
+                }
+            }
+        },
+        {
+            "identifier": "kWhImpCt",
+            "name": "正向有功电能翻转次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "正向有功电能翻转次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "kWhExpCt",
+            "name": "反向有功电能翻转次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "反向有功电能翻转次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "kvarhImpCt",
+            "name": "正向无功电能翻转次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "正向无功电能翻转次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "kvarhExpCt",
+            "name": "反向无功电能翻转次数",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "反向无功电能翻转次数",
+            "dataType": {
+                "type": "int64",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "",
+                    "step": "1"
+                }
+            }
+        },
+        {
+            "identifier": "Uunb",
+            "name": "电压不平衡度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电压不平衡度百分比",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "Iunb",
+            "name": "电流不平衡度",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "电流不平衡度百分比",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "UaTHD",
+            "name": "A相电压THD",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相电压总谐波失真",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "UbTHD",
+            "name": "B相电压THD",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相电压总谐波失真",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "UcTHD",
+            "name": "C相电压THD",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相电压总谐波失真",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "IaTHD",
+            "name": "A相电流THD",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "A相电流总谐波失真",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "IbTHD",
+            "name": "B相电流THD",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "B相电流总谐波失真",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "IcTHD",
+            "name": "C相电流THD",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "C相电流总谐波失真",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "100",
+                    "unit": "%",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "kWTotDmd",
+            "name": "总有功功率实时需量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "总有功功率实时需量值",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "千瓦 / kW",
+                    "step": "0.001"
+                }
+            }
+        },
+        {
+            "identifier": "kWTMDmd",
+            "name": "总有功功率最大值需量",
+            "functionType": "st",
+            "accessMode": "r",
+            "desc": "总有功功率最大值需量",
+            "dataType": {
+                "type": "double",
+                "specs": {
+                    "min": "0",
+                    "max": "1000000",
+                    "unit": "千瓦 / kW",
+                    "step": "0.001"
+                }
+            }
+        }
+    ],
+    "events": [],
+    "services": [],
+    "profile": {
+        "stTmId": "6a4cbdd5413efe32c8fbfbe4",
+        "name": "CET中电电表"
+    }
+}
