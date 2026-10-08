@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "automation-suite"
 version = "0.1.0"
-description = "Python 自动化测试套件：api 功能测试为主，预留 perf/security/contract 扩展位"
+description = "Python 自动化测试套件：api 功能测试为主，预留 perf/contract 扩展位"
 requires-python = ">=3.10"
 readme = "README.md"
 
@@ -19,6 +19,7 @@ core = [
     "tenacity>=8.2",
     "jsonpath-ng>=1.6",
     "pyyaml>=6.0",
+    "pycryptodome>=3.20",  # RuoYi-Cloud-Plus 混合加密登录（AES-ECB + RSA-PKCS1）
 ]
 # 开发工具链
 dev = [
@@ -40,35 +41,37 @@ api = [
     "tenacity>=8.2",
     "jsonpath-ng>=1.6",
     "pyyaml>=6.0",
-    "factory-boy>=3.3",
-    "faker>=22.0",
+    "pycryptodome>=3.20",  # RuoYi-Cloud-Plus 混合加密登录（AES-ECB + RSA-PKCS1）
 ]
-# 扩展位：预留依赖
-perf = ["locust>=2.20"]
-security = ["python-zaproxy>=0.1"]
 # MQTT 消息发布
 mqtt = ["paho-mqtt>=2.1"]
-# 契约测试模块：L1 schema 守护（必装）+ L2 OpenAPI 属性 + L3 消费者契约
+# 契约测试模块：L1 schema 守护（必装）+ L2 OpenAPI 属性（阶段 2 启用）+ L0 spec diff
 contract = [
     "jsonschema>=4.20",        # L1 本地 schema 校验
-    "schemathesis>=3.36",      # L2 OpenAPI 属性测试（reqres.in 无文档时用不到）
-    "pact-python>=2.3",        # L3 消费者驱动契约（多服务场景才需要）
+    "schemathesis>=3.36",      # L2 OpenAPI 属性测试（IoT：openapi_from_apifox.json）
+    "deepdiff>=6.7",           # L0 spec 差异对比（最新两份 spec 间破坏性变化守护）
+]
+# 性能测试模块：locust 阶梯式压测 / concurrent.futures 进程内并发（占位，按需启用）
+perf = [
+    # "locust>=2.20",          # 阶梯式分布式压测（按需放开）
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["common*", "modules*"]
+include = ["common*", "modules*", "shared*"]
 
 # --- pytest 配置 ---
 [tool.pytest.ini_options]
 minversion = "7.4"
-testpaths = ["modules/api/tests", "modules/contract/tests"]
+testpaths = ["modules/api/tests", "modules/contract/tests", "modules/perf/tests"]
 addopts = "-v --alluredir=reports/allure --strict-markers --strict-config"
 markers = [
     "smoke: 冒烟测试，核心链路快速验证",
     "regression: 回归测试，覆盖边界与异常",
     "e2e: 端到端场景测试",
     "contract: 契约测试，校验接口响应结构是否符合 schema 约定",
+    "api: 接口测试，L3 权限隔离 / L4 业务流转 / L5 异常韧性",
+    "perf: 性能测试，吞吐 / 延迟 / 稳定性",
 ]
 filterwarnings = [
     "error",
@@ -96,7 +99,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["common", "modules"]
+known-first-party = ["common", "modules", "shared"]
 
 # --- mypy 配置 ---
 [tool.mypy]

@@ -1,6 +1,6 @@
 # Automation-Suite
 
-Python 自动化测试套件骨架，当前实现 **接口功能测试（api）** 模块，预留 **性能测试（perf）、安全测试（security）、契约测试（contract）** 扩展位。
+Python 自动化测试套件骨架，当前实现 **接口功能测试（api）** 模块，预留 **性能测试（perf）、契约测试（contract）** 扩展位。
 
 ## 快速开始
 
@@ -26,7 +26,6 @@ automation-suite/
 ├── modules/
 │   ├── api/        # 接口功能测试（已实现）
 │   ├── perf/       # 性能测试（预留）
-│   ├── security/   # 安全测试（预留）
 │   └── contract/   # 契约测试（预留）
 ├── data/           # 测试数据（yaml）
 ├── reports/        # 报告输出（allure + logs，.gitignore）

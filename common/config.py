@@ -58,6 +58,12 @@ class SuiteConfig(BaseSettings):
     RETRY_BASE_DELAY: float = Field(1.0, description="重试退避基准秒数")
     RETRY_MAX_DELAY: float = Field(10.0, description="重试退避上限秒数")
 
+    # IoT 平台契约测试配置（Trae 生成）
+    APIFOX_PROJECT_ID: str = Field("", description="APIFOX 项目 ID，Trae 调 MCP 拉 OpenAPI spec 用")
+    TEST_SCENE_ID: str | None = Field(None, description="测试场所 ID，可选；仅写副作用链路需要做隔离，读用例不要求")
+    # 注：RuoYi 登录相关字段（TEST_TENANT_ID/LOGIN_RSA_PUBKEY/LOGIN_CLIENTID）
+    # 下沉到 modules/api/config.py 的 RuoYiConfig，common 不感知被测系统
+
     @field_validator("BASE_URL")
     @classmethod
     def _strip_trailing_slash(cls, v: str) -> str:

@@ -1,58 +1,60 @@
 """L2 OpenAPI 属性测试骨架：schemathesis 自动生成请求并校验响应。
 
 启用前置条件：
-1. 被测服务必须暴露 OpenAPI 文档（如 {BASE_URL}/openapi.json 或 /swagger.json）
-2. 安装 L2 依赖：pip install -e ".[contract]"，其中 contract 包含 schemathesis
-3. 取消下方 SCHEMA 的注释与 skip 标记
-
-reqres.in 没有完整 OpenAPI 文档，因此默认 skip。
-当你的被测服务有 OpenAPI 时，将 BASE_URL 指向该服务并放开 skip。
+1. 本地存在带日期后缀的 OpenAPI 文档（如 shared/apijson/openapi/openapi_YYYYMMDD.json，
+   由人工维护）。_SPEC_PATH 自动取 list_specs_by_date() 最新一份。
+2. 安装 L2 依赖：pip install -e ".[contract]"，其中 contract 包含 schemathesis。
+3. 取消下方 SCHEMA 的注释与 skip 标记。
 
 工作原理（schemathesis）：
 - 读取 OpenAPI 文档，知道每个接口的请求格式与响应格式
 - 自动给每个接口生成几十到几百个合法请求去发
 - 每个返回都拿去和 OpenAPI 中声明的 schema 对比
-- 自动发现"我没写到的边界"与"违反 spec 的响应"
+- 自动发现"没写到的边界"与"违反 spec 的响应"
+
+注意：schemathesis 发请求前需通过全局 auth_manager（根 conftest）拿 Bearer token
+并注入到每个请求。若被测系统需要额外鉴权头（如 clientid），在 case.headers 中一并补齐。
 """
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
-# 当被测服务提供 OpenAPI 文档时，放开下面三行注释并删除 skip
+from shared.apijson.api_catalog import get_default_catalog
+
+# OpenAPI spec 路径：取 list_specs_by_date() 最新一份（无 spec 时为 None → 整个文件 skip）
+_SPECS = get_default_catalog().list_specs_by_date()
+_SPEC_PATH: Path | None = _SPECS[0] if _SPECS else None
+
+pytestmark = pytest.mark.skipif(
+    _SPEC_PATH is None,
+    reason="openapi/ 目录下无带日期后缀的 spec，L2 属性测试跳过",
+)
+
+# 当 L2 正式启用时，放开下面注释并删除 test_openapi_contract_placeholder 的 skip：
+#
 # import schemathesis
-# from common.config import get_config
-# from common.auth import AuthManager
 #
-# _config = get_config()
-# _auth = AuthManager(_config)
+# SCHEMA = schemathesis.openapi.from_path(str(_SPEC_PATH))
 #
-# SCHEMA = schemathesis.openapi.from_url(
-#     f"{_config.BASE_URL}/openapi.json",
-#     headers={"Authorization": f"Bearer {_auth.token}"},
-# )
+#
+# @SCHEMA.parametrize()
+# def test_openapi_contract(case, auth_manager) -> None:
+#     """schemathesis 自动给每个接口生成请求。"""
+#     # 注入鉴权头（Bearer token；如需 clientid 等额外头在此补齐）
+#     case.headers = case.headers or {}
+#     case.headers["Authorization"] = f"Bearer {auth_manager.token}"
+#     response = case.call()
+#     case.validate_response(response)
 
 
-_ALLURE_SKIP_REASON = "reqres.in 无 OpenAPI 文档，L2 属性测试需被测服务提供 OpenAPI"
+_SKIP_REASON = "L2 属性测试尚未启用：确认 spec 与鉴权注入后放开 SCHEMA 参数化"
 
 
 @pytest.mark.contract
-@pytest.mark.skip(reason=_ALLURE_SKIP_REASON)
+@pytest.mark.skip(reason=_SKIP_REASON)
 def test_openapi_contract_placeholder() -> None:
-    """L2 占位：被测服务有 OpenAPI 文档后改为下方写法。
-
-    写法（取消文件顶部的注释后）：
-
-        @pytest.mark.contract
-        @SCHEMA.parametrize()
-        def test_openapi_contract(case):
-            \"\"\"schemathesis 自动给每个接口生成请求。\"\"\"
-            response = case.call()
-            case.validate_response(response)
-
-    case.validate_response 会校验：
-    - 状态码是否符合 OpenAPI 声明
-    - 响应 headers / body 是否符合 schema
-    - 不符合时给出违反点的可读描述
-    """
-    pytest.skip(_ALLURE_SKIP_REASON)
+    """L2 占位：spec 就位、鉴权注入确认后按文件头部注释改写为参数化用例。"""
+    pytest.skip(_SKIP_REASON)

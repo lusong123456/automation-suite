@@ -1,54 +1,31 @@
-"""AuthManager：登录缓存 token，401 自动刷新。"""
+"""AuthProvider 抽象基类：定义 token 获取/刷新契约。
+
+common 层只暴露接口与 token 缓存模板，具体被测系统的认证实现
+（如 RuoYi 混合加密登录）下沉到 modules/api/auth/。
+SuiteClient 通过本抽象持有 AuthProvider 实例，不感知具体系统。
+"""
 
 from __future__ import annotations
 
-from typing import Optional
-
-import httpx
-from tenacity import retry, stop_after_attempt, wait_exponential
+from abc import ABC, abstractmethod
 
 from common.config import SuiteConfig, get_config
-from common.exceptions import AuthenticationError
-from common.logging_conf import get_logger
 
-logger = get_logger("auth")
 
-# 认证管理类
-class AuthManager:
-    """认证管理：登录、缓存 token、401 自动重新登录。
+class AuthProvider(ABC):
+    """认证提供方抽象。
 
-    生命周期与 session 级 fixture 一致，进程内全局复用。
+    子类实现 login()（具体认证协议）与 extra_headers()（网关侧附加头）。
+    token 缓存与 refresh 模板在本基类提供。
     """
 
-    def __init__(self, config: Optional[SuiteConfig] = None) -> None:
-        self._config = config or get_config()
-        self._token: Optional[str] = None
+    def __init__(self, config: SuiteConfig | None = None) -> None:
+        self._config: SuiteConfig = config or get_config()
+        self._token: str | None = None
 
-    @retry(
-        reraise=True,
-        stop=stop_after_attempt(2),
-        wait=wait_exponential(multiplier=1, min=1, max=5),
-    )
+    @abstractmethod
     def login(self) -> str:
-        """调用 /api/login 获取 token 并缓存。"""
-        url = f"{self._config.BASE_URL}/api/login"
-        payload = {"email": self._config.USERNAME, "password": self._config.PASSWORD}
-        logger.info("登录请求 POST %s (user=%s)", url, self._config.USERNAME)
-
-        try:
-            resp = httpx.post(url, json=payload, timeout=self._config.REQUEST_TIMEOUT)
-            resp.raise_for_status()
-        except httpx.HTTPError as exc:
-            raise AuthenticationError(f"登录请求失败：{exc}") from exc
-
-        data = resp.json()
-        token = data.get("token")
-        if not token:
-            raise AuthenticationError(f"登录响应未包含 token：{data}")
-
-        self._token = token
-        logger.info("登录成功，token 已缓存")
-        return token
+        """登录并返回 token。子类实现具体认证协议。"""
 
     @property
     def token(self) -> str:
@@ -66,3 +43,11 @@ class AuthManager:
     def clear(self) -> None:
         """清除缓存的 token。"""
         self._token = None
+
+    def extra_headers(self) -> dict[str, str]:
+        """附加到所有请求的认证相关头（如网关 clientid）。
+
+        默认空，子类按需 override。SuiteClient 调用此方法获取所有
+        应附加到请求的认证头，无需感知具体系统。
+        """
+        return {}

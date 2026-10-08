@@ -6,7 +6,7 @@ import allure
 import pytest
 from pytest_assume.plugin import assume
 
-from common.auth import AuthManager
+from common.auth import AuthProvider
 
 
 @allure.epic("API 接口测试")
@@ -16,12 +16,10 @@ class TestAuth:
 
     @allure.story("登录成功")
     @pytest.mark.smoke
-    def test_login_success(self, suite_config) -> None:
-        """验证 POST /api/login 返回 token。"""
-        auth = AuthManager(suite_config)
-
+    def test_login_success(self, auth_manager: AuthProvider) -> None:
+        """验证 POST /auth/login（加密登录）返回 token。"""
         with allure.step("调用登录接口"):
-            token = auth.login()
+            token = auth_manager.login()
 
         with allure.step("验证返回 token 非空"):
             with assume:
@@ -33,7 +31,7 @@ class TestAuth:
 
     @allure.story("token 复用")
     @pytest.mark.regression
-    def test_token_cached(self, auth_manager: AuthManager) -> None:
+    def test_token_cached(self, auth_manager: AuthProvider) -> None:
         """验证 token 在会话内被缓存复用。"""
         with allure.step("第一次获取 token"):
             t1 = auth_manager.token

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 import httpx
 from tenacity import (
@@ -12,9 +12,8 @@ from tenacity import (
     wait_exponential,
 )
 
-from common.auth import AuthManager
+from common.auth import AuthProvider
 from common.config import SuiteConfig, get_config
-from common.exceptions import AuthenticationError
 from common.logging_conf import get_logger
 from common.reporting import attach_request_response
 
@@ -39,26 +38,27 @@ class SuiteClient:
 
     def __init__(
         self,
-        config: Optional[SuiteConfig] = None,
-        auth: Optional[AuthManager] = None,
+        auth: AuthProvider,
+        *,
+        config: SuiteConfig | None = None,
     ) -> None:
         self._config = config or get_config()
-        self._auth = auth or AuthManager(self._config)
+        self._auth = auth
         self._client = httpx.Client(timeout=self._config.REQUEST_TIMEOUT)
 
     # --- 内部辅助 ---
 
     def _build_headers(
         self,
-        extra: Optional[dict[str, str]] = None,
+        extra: dict[str, str] | None = None,
         with_auth: bool = True,
     ) -> dict[str, str]:
         headers = {"Content-Type": "application/json", "Accept": "application/json"}
+        # 网关侧附加头（如 RuoYi 的 clientid）由 AuthProvider 注入，
+        # SuiteClient 不感知具体系统
+        headers.update(self._auth.extra_headers())
         if with_auth:
-            try:
-                headers["Authorization"] = f"Bearer {self._auth.token}"
-            except AuthenticationError:
-                logger.warning("token 获取失败，请求将不带 Authorization 头")
+            headers["Authorization"] = f"Bearer {self._auth.token}"
         if extra:
             headers.update(extra)
         return headers
@@ -68,9 +68,9 @@ class SuiteClient:
         method: str,
         endpoint: str,
         *,
-        params: Optional[dict[str, Any]] = None,
-        json: Optional[Any] = None,
-        headers: Optional[dict[str, str]] = None,
+        params: dict[str, Any] | None = None,
+        json: Any | None = None,
+        headers: dict[str, str] | None = None,
         idempotent: bool = False,
         with_auth: bool = True,
         _is_replay: bool = False,
@@ -112,9 +112,12 @@ class SuiteClient:
 
     # --- 公开接口 ---
 
-    def get(self, endpoint: str, **kwargs: Any) -> httpx.Response:
-        """GET 请求，幂等可重试。"""
+    def _request_with_retry(self, method: str, endpoint: str, **kwargs: Any) -> httpx.Response:
+        """幂等动词统一入口：套 tenacity 重试后发请求。
 
+        4 个幂等动词（GET/PUT/DELETE/可选 POST）共用同一份重试配置，
+        避免在每个方法里重复定义 @retry 装饰器。
+        """
         @retry(
             reraise=True,
             retry=retry_if_exception_type(_RETRYABLE_EXCEPTIONS),
@@ -125,43 +128,21 @@ class SuiteClient:
             ),
         )
         def _go() -> httpx.Response:
-            return self._do_request("GET", endpoint, **kwargs)
+            return self._do_request(method, endpoint, **kwargs)
 
         return _go()
+
+    def get(self, endpoint: str, **kwargs: Any) -> httpx.Response:
+        """GET 请求，幂等可重试。"""
+        return self._request_with_retry("GET", endpoint, **kwargs)
 
     def put(self, endpoint: str, **kwargs: Any) -> httpx.Response:
         """PUT 请求，幂等可重试。"""
-
-        @retry(
-            reraise=True,
-            retry=retry_if_exception_type(_RETRYABLE_EXCEPTIONS),
-            stop=stop_after_attempt(self._config.MAX_RETRIES),
-            wait=wait_exponential(
-                multiplier=self._config.RETRY_BASE_DELAY,
-                max=self._config.RETRY_MAX_DELAY,
-            ),
-        )
-        def _go() -> httpx.Response:
-            return self._do_request("PUT", endpoint, **kwargs)
-
-        return _go()
+        return self._request_with_retry("PUT", endpoint, **kwargs)
 
     def delete(self, endpoint: str, **kwargs: Any) -> httpx.Response:
         """DELETE 请求，幂等可重试。"""
-
-        @retry(
-            reraise=True,
-            retry=retry_if_exception_type(_RETRYABLE_EXCEPTIONS),
-            stop=stop_after_attempt(self._config.MAX_RETRIES),
-            wait=wait_exponential(
-                multiplier=self._config.RETRY_BASE_DELAY,
-                max=self._config.RETRY_MAX_DELAY,
-            ),
-        )
-        def _go() -> httpx.Response:
-            return self._do_request("DELETE", endpoint, **kwargs)
-
-        return _go()
+        return self._request_with_retry("DELETE", endpoint, **kwargs)
 
     def post(
         self,
@@ -178,20 +159,7 @@ class SuiteClient:
         """
         if not idempotent:
             return self._do_request("POST", endpoint, **kwargs)
-
-        @retry(
-            reraise=True,
-            retry=retry_if_exception_type(_RETRYABLE_EXCEPTIONS),
-            stop=stop_after_attempt(self._config.MAX_RETRIES),
-            wait=wait_exponential(
-                multiplier=self._config.RETRY_BASE_DELAY,
-                max=self._config.RETRY_MAX_DELAY,
-            ),
-        )
-        def _go() -> httpx.Response:
-            return self._do_request("POST", endpoint, idempotent=True, **kwargs)
-
-        return _go()
+        return self._request_with_retry("POST", endpoint, idempotent=True, **kwargs)
 
     # --- 资源管理 ---
 
@@ -200,7 +168,7 @@ class SuiteClient:
         self._client.close()
         logger.info("SuiteClient 已关闭")
 
-    def __enter__(self) -> "SuiteClient":
+    def __enter__(self) -> SuiteClient:
         return self
 
     def __exit__(self, exc_type: object, exc: object, tb: object) -> None:
